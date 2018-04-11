@@ -143,7 +143,7 @@ void constructObjectTREST(PhysycObject& object)
 
 Window::Window()
 {
-    setGeometry(2000,100,2900,900);
+    setGeometry(100,100,1100,1100);
     setMaximumHeight(1000);
     setMaximumWidth(1000);
 
