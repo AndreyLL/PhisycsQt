@@ -52,8 +52,14 @@
 
 #include <QApplication>
 
+#include "datareader.h"
+
 int main(int argc, char *argv[])
 {
+    PhObject objects;
+    int a = DataReader::readFile("D:\\Qt\\Examples\\Qt-5.10.0\\widgets\\painting\\concentriccircles2\\objectData.txt", objects);
+    if (!a)
+        return -100;
     QApplication app(argc, argv);
     Window window;
     window.show();

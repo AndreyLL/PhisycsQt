@@ -55,8 +55,7 @@
 
 #include <stdlib.h>
 
-//! [0]
-CircleWidget::CircleWidget(QWidget *parent)
+PhPysicalObject::PhPysicalObject(QWidget *parent)
     : QWidget(parent)
 {
     floatBased = false;
@@ -69,59 +68,43 @@ CircleWidget::CircleWidget(QWidget *parent)
     int currentTime = timer.currentTime().msecsSinceStartOfDay();
     m_timeBefore  = currentTime;
 }
-//! [0]
 
-//! [1]
-void CircleWidget::setFloatBased(bool floatBased)
+void PhPysicalObject::setFloatBased(bool floatBased)
 {
     this->floatBased = floatBased;
     update();
 }
-//! [1]
 
-//! [2]
-void CircleWidget::setAntialiased(bool antialiased)
+void PhPysicalObject::setAntialiased(bool antialiased)
 {
     this->antialiased = antialiased;
     update();
 }
-//! [2]
 
-//! [3]
-QSize CircleWidget::minimumSizeHint() const
+QSize PhPysicalObject::minimumSizeHint() const
 {
     return QSize(50, 50);
 }
-//! [3]
 
-//! [4]
-QSize CircleWidget::sizeHint() const
+QSize PhPysicalObject::sizeHint() const
 {
     return QSize(180, 180);
 }
 
-void CircleWidget::setFigure(PhysycObject &object)
+void PhPysicalObject::setFigure(PhysycObject &object)
 {
     m_object = &object;
 }
 
 
-
-
-
-//! [4]
-
-//! [5]
-void CircleWidget::nextAnimationFrame()
+void PhPysicalObject::nextAnimationFrame()
 {
     ++frameNo;
     update();
 
 }
-//! [5]
 
-//! [6]
-void CircleWidget::paintEvent(QPaintEvent *)
+void PhPysicalObject::paintEvent(QPaintEvent *)
 {
     QTime timer;
 
@@ -142,4 +125,4 @@ void CircleWidget::paintEvent(QPaintEvent *)
     //painter.setBackground(QBrush(QColor(0,  127, 127)));
     painter.drawPolygon(*points,Qt::OddEvenFill);
 }
-//! [8]
+

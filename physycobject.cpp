@@ -9,12 +9,12 @@ PhysycObject::PhysycObject()
 
 PhysycObject::PhysycObject(const MyPolygoinF &points):
    m_points(points),
-   m_gravity(PointsType(0.0,1.0))
+   m_gravity(PhPointsType(0.0,1.0))
 {
     m_prev_points = points;
 }
 
-PhysycObject::PhysycObject(const MyPolygoinF &points, const PointsType &gravity, const  MyPolygoinF &forces):
+PhysycObject::PhysycObject(const MyPolygoinF &points, const PhPointsType &gravity, const  MyPolygoinF &forces):
     m_points(points),
     m_gravity(gravity),
     m_forces(forces)
@@ -31,7 +31,7 @@ void PhysycObject::setPoints(const MyPolygoinF &points)
     m_prev_points = points;
 }
 
-void PhysycObject::setGravity(const PointsType &gravity)
+void PhysycObject::setGravity(const PhPointsType &gravity)
 {
     m_gravity = gravity;
 }
@@ -57,10 +57,10 @@ void PhysycObject::verlet(float timeStamp)
 {
     for(int i =0;i<m_points.size(); i++)
     {
-        PointsType& point  = m_points[i];
-        PointsType tmp = point;
-        PointsType&  prev_point = m_prev_points[i];
-        PointsType&  force = m_forces[i];
+        PhPointsType& point  = m_points[i];
+        PhPointsType tmp = point;
+        PhPointsType&  prev_point = m_prev_points[i];
+        PhPointsType&  force = m_forces[i];
         point += point - prev_point + force * timeStamp*timeStamp;
         prev_point = tmp;
     }
@@ -86,7 +86,7 @@ void PhysycObject::satisfy_constrains()
     {
         for(int j=0;j<m_points.size();j++)
         {
-            PointsType& point = m_points[j];
+            PhPointsType& point = m_points[j];
             point.rx() = std::min(std::max(point.rx(), -600.0 ), 300.0);
             point.ry() = std::min(std::max(point.ry(), -600.0 ), 300.0);
         }
@@ -118,7 +118,7 @@ void PhysycObject::doWork(float timeStamp)
     satisfy_constrains();
 }
 
-double PhysycObject::distance(const PointsType &a, const PointsType &b)
+double PhysycObject::distance(const PhPointsType &a, const PhPointsType &b)
 {
     double dx = a.x() - b.x();
     double dy = a.y() - b.y();

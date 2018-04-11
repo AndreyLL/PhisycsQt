@@ -60,7 +60,7 @@
 //!
 //!
 
-double distance(const PointsType &a, const PointsType &b)
+double distance(const PhPointsType &a, const PhPointsType &b)
 {
     double dx = a.x() - b.x();
     double dy = a.y() - b.y();
@@ -68,78 +68,6 @@ double distance(const PointsType &a, const PointsType &b)
 
 }
 
-void constructObjectTREST(PhysycObject& object)
-{
-
-//    MyPolygoinF poly ={QPointF(40,0),
-//                      QPointF(50,50),
-//                      QPointF(0, 40),
-//                      QPointF(-50,50),
-//                      QPointF(-40,0),
-//                      QPointF(-50,-50),
-//                      QPointF(0,-40),
-//                      QPointF(50,-50)
-//                     } ;
-    MyPolygoinF poly =  {   QPointF(70,0), //0
-                            QPointF(0, 40), //1
-                            QPointF(-40,0), //2
-                            QPointF(0,-40), //3
-                            QPointF(70, 0), //4
-                        };
-    MyPolygoinF poly2 = {
-                            QPointF(70,0), //     5
-                            QPointF(130,20), //   6
-                            QPointF(130,-20), //  7
-                        };
-    MyPolygoinF poly3 = {
-                            QPointF(130, -20), //     8
-                            QPointF(150, -40), //   9
-                            QPointF(150, 0), //  10
-                        };
-    poly.append(poly2);
-    poly.append(poly3);
-
-    for (int i =0; i < poly.size(); i++) {
-        poly[i]=poly[i]-QPointF(0, 300);
-    }
-
-    object.setPoints( poly );
-    MyPolygoinF forces;
-    forces.resize( object.points().size() );
-    object.setForces(forces);
-    object.setGravity(PointsType(0.0,40.0));
-
-    //for (int i = 0; i < poly.size()-1; ++i)
-    for (int i = 0; i < 4; ++i)
-    {
-        object.m_constrains.push_back({ i,i+1, distance(poly[i],poly[i+1] )} );
-    }
-
-    object.m_constrains.push_back({ 0,4, distance(poly[0],poly[4])} );
-    object.m_constrains.push_back({ 0,2, distance(poly[0],poly[2]) } );
-    object.m_constrains.push_back({ 1,3, distance(poly[1],poly[3]) } );
-
-
-
-    int tsf =  5;
-    object.m_constrains.push_back({ 5, 6, distance(poly[5],poly[6]) } );
-    object.m_constrains.push_back({ 6,7, distance(poly[6],poly[7]) } );
-
-    object.m_constrains.push_back({ 7,5, distance(poly[7],poly[5]) } );
-    object.m_constrains.push_back({ 0, 5, distance(poly[0],poly[5]) } );
-    object.m_constrains.push_back({ 0, 7, distance(poly[0],poly[7]) } );
-
-
-    object.m_prev_points[2] = object.m_points[2] - QPointF(10,10);
-
-    object.m_constrains.push_back({ 8, 9, distance(poly[8],poly[9]) } );
-    object.m_constrains.push_back({ 9, 10, distance(poly[9],poly[10]) } );
-    object.m_constrains.push_back({ 8, 10, distance(poly[8],poly[10]) } );
-
-    object.m_constrains.push_back({ 7, 8, distance(poly[6],poly[8]) } );
-    object.m_constrains.push_back({ 7, 10, distance(poly[6],poly[10]) } );
-
-}
 
 Window::Window()
 {
@@ -157,12 +85,12 @@ Window::Window()
 
     QTimer *timer = new QTimer(this);
 
-    circleWidgets[0][0] = new CircleWidget;
+    circleWidgets[0][0] = new PhPysicalObject;
     circleWidgets[0][0]->setAntialiased(1);
     circleWidgets[0][0]->setFloatBased(1);
 
 
-    constructObjectTREST(phisyc_obj);
+    //constructObjectTREST(phisyc_obj);
     circleWidgets[0][0]->setFigure(phisyc_obj);
 
     connect(timer, SIGNAL(timeout()),
@@ -185,6 +113,17 @@ QLabel *Window::createLabel(const QString &text)
     label->setMargin(2);
     label->setFrameStyle(QFrame::Box | QFrame::Sunken);
     return label;
+}
+
+void Window::setObjectsToDraw(const PhObject &phObject)
+{
+    m_phObjects = phObject;
+
+}
+
+void Window::startAnimation()
+{
+
 }
 //! [3]
 
