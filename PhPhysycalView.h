@@ -59,14 +59,12 @@
 #include "physycobject.h"
 
 
-
-//! [0]
 class PhPhysycalView : public QWidget
 {
     Q_OBJECT
 
 public:
-    PhPysicalWidget(QWidget *parent = 0);
+    PhPhysycalView(QWidget *parent = 0);
 
     void setFloatBased(bool floatBased);
     void setAntialiased(bool antialiased);
@@ -74,10 +72,11 @@ public:
     QSize minimumSizeHint() const override;
     QSize sizeHint() const override;
     void setFigure( PhysycObject& points);
-
+    void updatePhisycs();
 
 public slots:
     void nextAnimationFrame();
+    void phInit();
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -90,6 +89,6 @@ private:
     int m_timeBefore;
 
 };
-//! [0]
+
 
 #endif // CIRCLEWIDGET_H

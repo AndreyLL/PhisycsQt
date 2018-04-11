@@ -97,10 +97,10 @@ void PhysycObject::satisfy_constrains()
             QPointF &b = m_points[con.pointB];
             QPointF deltaPoint = a - b;
 
-            double deltaLength = distance(QPointF(0,0), deltaPoint);
+            double deltaLength = phDistance(QPointF(0,0), deltaPoint);
             if ( deltaLength != deltaLength)
                 deltaLength = 0;
-            double diff = ( distance(a,b) - con.d ) / distance(a,b);
+            double diff = ( phDistance(a,b) - con.d ) / phDistance(a,b);
             if ( diff != diff)
                 diff = 0;
             a-=deltaPoint*0.5*diff;
@@ -116,11 +116,11 @@ void PhysycObject::doWork(float timeStamp)
     satisfy_constrains();
 }
 
-double PhysycObject::distance(const PhPointsType &a, const PhPointsType &b)
-{
-    double dx = a.x() - b.x();
-    double dy = a.y() - b.y();
-    return (  std::sqrt(dx*dx + dy*dy) );
+//double PhysycObject::distance(const PhPointsType &a, const PhPointsType &b)
+//{
+//    double dx = a.x() - b.x();
+//    double dy = a.y() - b.y();
+//    return (  std::sqrt(dx*dx + dy*dy) );
 
-}
+//}
 

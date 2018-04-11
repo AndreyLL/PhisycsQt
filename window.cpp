@@ -74,25 +74,16 @@ Window::Window()
 
 
     QGridLayout *layout = new QGridLayout;
-    QTimer *timer = new QTimer(this);
-
-//    circleWidgets[0][0] = new PhPysicalObject;
-//    circleWidgets[0][0]->setAntialiased(1);
-//    circleWidgets[0][0]->setFloatBased(1);
+    PhPhysycalView *phView = new PhPhysycalView;
+    QPushButton * button = new QPushButton("Start");
 
 
-//    //constructObjectTREST(phisyc_obj);
-//    circleWidgets[0][0]->setFigure(phisyc_obj);
-
-//    connect(timer, SIGNAL(timeout()),
-//            circleWidgets[0][0], SLOT(nextAnimationFrame()));
-
-
-      layout->addWidget(aliasedLabel, 0, 0);
-//    layout->addWidget(circleWidgets[0][0], 1, 1);
-//    timer->start(1000/60);
+    layout->addWidget(aliasedLabel, 0, 0);
+    layout->addWidget(phView, 1, 0);
+    layout->addWidget(button, 2, 0);
+    connect(button, SIGNAL(pressed()),phView, SLOT(phInit()));
     setLayout(layout);
-    setWindowTitle(tr("Concentric Circles"));
+    setWindowTitle(tr("Phisycas"));
 }
 //! [2]
 
@@ -106,15 +97,6 @@ QLabel *Window::createLabel(const QString &text)
     return label;
 }
 
-void Window::setObjectsToDraw(const QVector<PhObject> &phObject)
-{
-    m_phObjects = phObject;
 
-}
-
-void Window::startAnimation()
-{
-
-}
 //! [3]
 

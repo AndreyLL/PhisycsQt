@@ -11,10 +11,10 @@ SOURCES       = \
                 window.cpp \
     physycobject.cpp \
     datareader.cpp \
-    PhPhysycalView.cpp
+    PhPhysycalView.cpp \
+    basictypes.cpp
 
-# install
-target.path = $$[QT_INSTALL_EXAMPLES]/widgets/painting/concentriccircles
+
 INSTALLS += target
 
 DISTFILES += \

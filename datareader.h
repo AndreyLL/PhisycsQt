@@ -6,7 +6,7 @@
 #include <QTextStream>
 
 #include <basictypes.h>
-#include <physycobject.h>.h>
+#include <physycobject.h>
 
 
 

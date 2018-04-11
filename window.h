@@ -78,7 +78,7 @@ private:
     PhPhysycalView *circleWidgets[2][2];
     PhysycObject phisyc_obj;
 
-    void setPhisycWidget(const PhPhysycalView phWidget);
+    //void setPhisycWidget(const PhPhysycalView phWidget);
 
     QVector<PhObject> m_phObjects;
 

@@ -51,6 +51,8 @@
 #include "PhPhysycalView.h"
 
 #include <QPainter>
+#include <QTimer>
+
 #include <iostream>
 
 #include <stdlib.h>
@@ -58,15 +60,25 @@
 PhPhysycalView::PhPhysycalView(QWidget *parent)
     : QWidget(parent)
 {
-    floatBased = false;
-    antialiased = false;
+//    floatBased = false;
+//    antialiased = false;
     frameNo = 0;
 
     setBackgroundRole(QPalette::Base);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    QTime timer;
-    int currentTime = timer.currentTime().msecsSinceStartOfDay();
+
+}
+
+
+void PhPhysycalView::phInit()
+{
+    QTime time;
+    int currentTime = time.currentTime().msecsSinceStartOfDay();
     m_timeBefore  = currentTime;
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()),
+              this, SLOT(nextAnimationFrame()));
+    timer->setInterval(10);
 }
 
 void PhPhysycalView::setFloatBased(bool floatBased)
@@ -96,6 +108,11 @@ void PhPhysycalView::setFigure(PhysycObject &object)
     m_object = &object;
 }
 
+void PhPhysycalView::updatePhisycs()
+{
+
+}
+
 
 void PhPhysycalView::nextAnimationFrame()
 {
@@ -104,25 +121,26 @@ void PhPhysycalView::nextAnimationFrame()
 
 }
 
+
 void PhPhysycalView::paintEvent(QPaintEvent *)
 {
-    QTime timer;
+//    QTime timer;
 
-    int currentTime = timer.currentTime().msecsSinceStartOfDay();
-    int diff  =  currentTime - m_timeBefore;
-    m_timeBefore  = currentTime;
-    m_object->doWork(diff);
+//    int currentTime = timer.currentTime().msecsSinceStartOfDay();
+//    int diff  =  currentTime - m_timeBefore;
+//    m_timeBefore  = currentTime;
+//    m_object->doWork(diff);
 
-    MyPolygoinF* points =  &( m_object->points() );
+//    MyPolygoinF* points =  &( m_object->points() );
 
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing, antialiased);
-    painter.translate( width() / 2, height() / 2 );
-    int size_v = points->size();
-    if (!size_v)
-        return;
-    painter.setPen(QPen(QColor(0,  127, 127), 3));
-    //painter.setBackground(QBrush(QColor(0,  127, 127)));
-    painter.drawPolygon(*points,Qt::OddEvenFill);
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing, antialiased);
+//    painter.translate( width() / 2, height() / 2 );
+//    int size_v = points->size();
+//    if (!size_v)
+//        return;
+//    painter.setPen(QPen(QColor(0,  127, 127), 3));
+//    //painter.setBackground(QBrush(QColor(0,  127, 127)));
+//    painter.drawPolygon(*points,Qt::OddEvenFill);
 }
 

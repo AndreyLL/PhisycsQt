@@ -61,7 +61,7 @@ struct PhObject {
 };
 
 
-class ParticleSystem {
+class PhParticleSystemPhisyc {
     void verlet(float timeStamp);
     void accumulate_forces();
     void satisfy_constrains();
@@ -89,7 +89,7 @@ public:
     void doWork(float timeStamp = 1);
 
 
-    double distance(const PhPointsType& a, const PhPointsType& b);
+//    double distance(const PhPointsType& a, const PhPointsType& b);
 
 
     MyPolygoinF& points();
