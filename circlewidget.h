@@ -61,12 +61,12 @@
 
 
 //! [0]
-class CircleWidget : public QWidget
+class PhPysicalObject : public QWidget
 {
     Q_OBJECT
 
 public:
-    CircleWidget(QWidget *parent = 0);
+    PhPysicalObject(QWidget *parent = 0);
 
     void setFloatBased(bool floatBased);
     void setAntialiased(bool antialiased);

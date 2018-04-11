@@ -58,7 +58,7 @@
 QT_BEGIN_NAMESPACE
 class QLabel;
 QT_END_NAMESPACE
-class CircleWidget;
+class PhPysicalObject;
 
 //! [0]
 class Window : public QWidget
@@ -75,8 +75,15 @@ private:
     QLabel *antialiasedLabel;
     QLabel *intLabel;
     QLabel *floatLabel;
-    CircleWidget *circleWidgets[2][2];
+    PhPysicalObject *circleWidgets[2][2];
     PhysycObject phisyc_obj;
+
+
+    void setObjectsToDraw(const PhObject& phObject);
+    void startAnimation();
+
+    QVector<PhObject> m_phObjects;
+
 };
 //! [0]
 
