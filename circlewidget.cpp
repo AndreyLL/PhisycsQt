@@ -55,7 +55,6 @@
 
 #include <stdlib.h>
 
-//! [0]
 PhPysicalObject::PhPysicalObject(QWidget *parent)
     : QWidget(parent)
 {
@@ -69,32 +68,24 @@ PhPysicalObject::PhPysicalObject(QWidget *parent)
     int currentTime = timer.currentTime().msecsSinceStartOfDay();
     m_timeBefore  = currentTime;
 }
-//! [0]
 
-//! [1]
 void PhPysicalObject::setFloatBased(bool floatBased)
 {
     this->floatBased = floatBased;
     update();
 }
-//! [1]
 
-//! [2]
 void PhPysicalObject::setAntialiased(bool antialiased)
 {
     this->antialiased = antialiased;
     update();
 }
-//! [2]
 
-//! [3]
 QSize PhPysicalObject::minimumSizeHint() const
 {
     return QSize(50, 50);
 }
-//! [3]
 
-//! [4]
 QSize PhPysicalObject::sizeHint() const
 {
     return QSize(180, 180);
@@ -106,21 +97,13 @@ void PhPysicalObject::setFigure(PhysycObject &object)
 }
 
 
-
-
-
-//! [4]
-
-//! [5]
 void PhPysicalObject::nextAnimationFrame()
 {
     ++frameNo;
     update();
 
 }
-//! [5]
 
-//! [6]
 void PhPysicalObject::paintEvent(QPaintEvent *)
 {
     QTime timer;
@@ -142,4 +125,4 @@ void PhPysicalObject::paintEvent(QPaintEvent *)
     //painter.setBackground(QBrush(QColor(0,  127, 127)));
     painter.drawPolygon(*points,Qt::OddEvenFill);
 }
-//! [8]
+
