@@ -64,8 +64,6 @@ void PhysycObject::verlet(float timeStamp)
         point += point - prev_point + force * timeStamp*timeStamp;
         prev_point = tmp;
     }
-
-
     auto a = m_points[0].ry();
     auto b =  m_prev_points[0].ry();
     std::cout << a-b << std::endl;

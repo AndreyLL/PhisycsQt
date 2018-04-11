@@ -1,15 +1,17 @@
 QT += widgets
 CONFIG += c++11
-HEADERS       = circlewidget.h \
+HEADERS       = \
                 window.h \
     physycobject.h \
     basictypes.h \
-    datareader.h
-SOURCES       = circlewidget.cpp \
+    datareader.h \
+    PhPhysycalView.h
+SOURCES       = \
                 main.cpp \
                 window.cpp \
     physycobject.cpp \
-    datareader.cpp
+    datareader.cpp \
+    PhPhysycalView.cpp
 
 # install
 target.path = $$[QT_INSTALL_EXAMPLES]/widgets/painting/concentriccircles

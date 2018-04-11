@@ -48,81 +48,48 @@
 **
 ****************************************************************************/
 
-#include "circlewidget.h"
+#ifndef CIRCLEWIDGET_H
+#define CIRCLEWIDGET_H
 
-#include <QPainter>
-#include <iostream>
+#include <QWidget>
+#include <QVector>
+#include <QPolygonF>
+#include <QTime>
 
-#include <stdlib.h>
+#include "physycobject.h"
 
-PhPysicalObject::PhPysicalObject(QWidget *parent)
-    : QWidget(parent)
+
+
+//! [0]
+class PhPhysycalView : public QWidget
 {
-    floatBased = false;
-    antialiased = false;
-    frameNo = 0;
+    Q_OBJECT
 
-    setBackgroundRole(QPalette::Base);
-    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    QTime timer;
-    int currentTime = timer.currentTime().msecsSinceStartOfDay();
-    m_timeBefore  = currentTime;
-}
+public:
+    PhPysicalWidget(QWidget *parent = 0);
 
-void PhPysicalObject::setFloatBased(bool floatBased)
-{
-    this->floatBased = floatBased;
-    update();
-}
+    void setFloatBased(bool floatBased);
+    void setAntialiased(bool antialiased);
 
-void PhPysicalObject::setAntialiased(bool antialiased)
-{
-    this->antialiased = antialiased;
-    update();
-}
-
-QSize PhPysicalObject::minimumSizeHint() const
-{
-    return QSize(50, 50);
-}
-
-QSize PhPysicalObject::sizeHint() const
-{
-    return QSize(180, 180);
-}
-
-void PhPysicalObject::setFigure(PhysycObject &object)
-{
-    m_object = &object;
-}
+    QSize minimumSizeHint() const override;
+    QSize sizeHint() const override;
+    void setFigure( PhysycObject& points);
 
 
-void PhPysicalObject::nextAnimationFrame()
-{
-    ++frameNo;
-    update();
+public slots:
+    void nextAnimationFrame();
 
-}
+protected:
+    void paintEvent(QPaintEvent *event) override;
+private:
+    PhysycObject* m_object;
 
-void PhPysicalObject::paintEvent(QPaintEvent *)
-{
-    QTime timer;
+    bool floatBased;
+    bool antialiased;
+    int frameNo;
+    int m_timeBefore;
 
-    int currentTime = timer.currentTime().msecsSinceStartOfDay();
-    int diff  =  currentTime - m_timeBefore;
-    m_timeBefore  = currentTime;
-    m_object->doWork(diff);
+};
+//! [0]
 
-    MyPolygoinF* points =  &( m_object->points() );
-
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing, antialiased);
-    painter.translate( width() / 2, height() / 2 );
-    int size_v = points->size();
-    if (!size_v)
-        return;
-    painter.setPen(QPen(QColor(0,  127, 127), 3));
-    //painter.setBackground(QBrush(QColor(0,  127, 127)));
-    painter.drawPolygon(*points,Qt::OddEvenFill);
-}
-
+#endif // CIRCLEWIDGET_H

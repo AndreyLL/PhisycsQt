@@ -48,7 +48,7 @@
 **
 ****************************************************************************/
 
-#include "circlewidget.h"
+#include "PhPhysycalView.h"
 #include "window.h"
 
 #include <QtWidgets>
@@ -60,13 +60,7 @@
 //!
 //!
 
-double distance(const PhPointsType &a, const PhPointsType &b)
-{
-    double dx = a.x() - b.x();
-    double dy = a.y() - b.y();
-    return (  std::sqrt(dx*dx + dy*dy) );
 
-}
 
 
 Window::Window()
@@ -76,30 +70,27 @@ Window::Window()
     setMaximumWidth(1000);
 
 
-    aliasedLabel = createLabel(tr("Aliased"));
-    antialiasedLabel = createLabel(tr("Antialiased"));
-    intLabel = createLabel(tr("Int"));
-    floatLabel = createLabel(tr("Float"));
+    aliasedLabel = createLabel(tr("Phisycs QT"));
+
 
     QGridLayout *layout = new QGridLayout;
-
     QTimer *timer = new QTimer(this);
 
-    circleWidgets[0][0] = new PhPysicalObject;
-    circleWidgets[0][0]->setAntialiased(1);
-    circleWidgets[0][0]->setFloatBased(1);
+//    circleWidgets[0][0] = new PhPysicalObject;
+//    circleWidgets[0][0]->setAntialiased(1);
+//    circleWidgets[0][0]->setFloatBased(1);
 
 
-    //constructObjectTREST(phisyc_obj);
-    circleWidgets[0][0]->setFigure(phisyc_obj);
+//    //constructObjectTREST(phisyc_obj);
+//    circleWidgets[0][0]->setFigure(phisyc_obj);
 
-    connect(timer, SIGNAL(timeout()),
-            circleWidgets[0][0], SLOT(nextAnimationFrame()));
+//    connect(timer, SIGNAL(timeout()),
+//            circleWidgets[0][0], SLOT(nextAnimationFrame()));
 
 
-    layout->addWidget(aliasedLabel, 0, 0);
-    layout->addWidget(circleWidgets[0][0], 1, 1);
-    timer->start(1000/60);
+      layout->addWidget(aliasedLabel, 0, 0);
+//    layout->addWidget(circleWidgets[0][0], 1, 1);
+//    timer->start(1000/60);
     setLayout(layout);
     setWindowTitle(tr("Concentric Circles"));
 }
@@ -115,7 +106,7 @@ QLabel *Window::createLabel(const QString &text)
     return label;
 }
 
-void Window::setObjectsToDraw(const PhObject &phObject)
+void Window::setObjectsToDraw(const QVector<PhObject> &phObject)
 {
     m_phObjects = phObject;
 

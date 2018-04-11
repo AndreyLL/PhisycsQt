@@ -53,6 +53,8 @@
 #include <QApplication>
 
 #include "datareader.h"
+#include "PhPhysycalView.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -60,8 +62,10 @@ int main(int argc, char *argv[])
     int a = DataReader::readFile("D:\\Qt\\Examples\\Qt-5.10.0\\widgets\\painting\\concentriccircles2\\objectData.txt", objects);
     if (!a)
         return -100;
+    PhPhysycalView myObject;
     QApplication app(argc, argv);
     Window window;
     window.show();
+
     return app.exec();
 }
